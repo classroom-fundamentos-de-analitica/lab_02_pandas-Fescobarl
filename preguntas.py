@@ -90,6 +90,7 @@ def pregunta_06():
     """
     Retorne una lista con los valores unicos de la columna _c4 de del archivo `tbl1.csv`
     en mayusculas y ordenados alfabéticamente.
+    
 
     Rta/
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
