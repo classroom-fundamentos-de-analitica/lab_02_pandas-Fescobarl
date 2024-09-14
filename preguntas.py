@@ -22,8 +22,10 @@ def pregunta_01():
     40
 
     """
+    num_filas = tbl0.shape[0]
 
-    return tbl0.shape[0]
+    return num_filas
+
 
 
 def pregunta_02():
@@ -35,6 +37,7 @@ def pregunta_02():
 
     """
     return tbl0.shape[1]
+
 
 
 def pregunta_03():
@@ -54,6 +57,8 @@ def pregunta_03():
     return tbl0['_c1'].value_counts().sort_index()
 
 
+
+
 def pregunta_04():
     """
     Calcule el promedio de _c2 por cada letra de la _c1 del archivo `tbl0.tsv`.
@@ -67,6 +72,7 @@ def pregunta_04():
     Name: _c2, dtype: float64
     """
     return tbl0.groupby('_c1')['_c2'].mean()
+
 
 
 def pregunta_05():
@@ -86,6 +92,8 @@ def pregunta_05():
     return tbl0.groupby('_c1')['_c2'].max()
 
 
+
+
 def pregunta_06():
     """
     Retorne una lista con los valores unicos de la columna _c4 de del archivo `tbl1.csv`
@@ -97,6 +105,8 @@ def pregunta_06():
 
     """
     return sorted(tbl1['_c4'].str.upper().unique())
+
+
 
 
 def pregunta_07():
@@ -113,6 +123,8 @@ def pregunta_07():
     Name: _c2, dtype: int64
     """
     return tbl0.groupby('_c1')['_c2'].sum()
+
+
 
 
 def pregunta_08():
@@ -135,6 +147,8 @@ def pregunta_08():
     return tbl0
 
 
+
+
 def pregunta_09():
     """
     Agregue el año como una columna al archivo `tbl0.tsv`.
@@ -150,9 +164,12 @@ def pregunta_09():
     39   39   E    5  1998-01-26  1998
 
     """
-    tbl0['year'] = pd.to_datetime(tbl0['_c3']).dt.year
+    tbl0 = pd.read_csv('tbl0.tsv', sep='\t')
+    tbl0['_c3'] = pd.to_datetime(tbl0['_c3'], errors='coerce')
+    tbl0['year'] = tbl0['_c3'].dt.year
 
     return tbl0
+
 
 
 def pregunta_10():
@@ -192,6 +209,7 @@ def pregunta_11():
     return tbl1.groupby('_c0')['_c4'].apply(lambda x: ','.join(sorted(x))).reset_index()
 
 
+
 def pregunta_12():
     """
     Construya una tabla que contenga _c0 y una lista separada por ',' de los valores de
@@ -211,6 +229,7 @@ def pregunta_12():
     return tbl2.groupby('_c0')['_c5'].apply(lambda x: ','.join(sorted(x))).reset_index()
 
 
+
 def pregunta_13():
     """
     Si la columna _c0 es la clave en los archivos `tbl0.tsv` y `tbl2.tsv`, compute la
@@ -227,3 +246,5 @@ def pregunta_13():
     """
     merged = pd.merge(tbl0, tbl2, on='_c0')
     return merged.groupby('_c1')['_c5b'].sum()
+
+
